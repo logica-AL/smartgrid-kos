@@ -1,0 +1,17 @@
+# Python bytecode and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# OS/editor temporary files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Office lock files
+~$*
+
+# Codex authoring previews and private build outputs
+.codex-build/
+.codex-output/

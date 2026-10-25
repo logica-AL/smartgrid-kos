@@ -1,0 +1,51 @@
+{
+  "source": "synthetic illustrative corridor graph, not real sensor data",
+  "state": "technician current node",
+  "action": "move to adjacent node",
+  "goal": "Kamar 2 alert",
+  "cost": "1 per edge; all edges equal",
+  "graph": {
+    "Lobi": [
+      "Koridor A",
+      "Koridor B"
+    ],
+    "Koridor A": [
+      "Lobi",
+      "Kamar 1",
+      "Kamar 2"
+    ],
+    "Koridor B": [
+      "Lobi",
+      "Kamar 3"
+    ],
+    "Kamar 1": [
+      "Koridor A"
+    ],
+    "Kamar 2": [
+      "Koridor A"
+    ],
+    "Kamar 3": [
+      "Koridor B"
+    ]
+  },
+  "path": [
+    "Lobi",
+    "Koridor A",
+    "Kamar 2"
+  ],
+  "explored_nodes": [
+    "Lobi",
+    "Koridor A",
+    "Koridor B",
+    "Kamar 1",
+    "Kamar 2"
+  ],
+  "explored_count": 5,
+  "complete": "yes for reachable goal in a finite graph",
+  "optimal": "shortest edge-count path for an unweighted graph",
+  "complexity": {
+    "time": "O(V+E)",
+    "space": "O(V)"
+  },
+  "weighted_graph_note": "For unequal edge costs, use Dijkstra or A*."
+}

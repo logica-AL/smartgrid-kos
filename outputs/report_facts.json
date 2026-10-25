@@ -1,0 +1,699 @@
+{
+  "report_status": "DRAFT - rubrik Bagian D dan E belum tersedia; Bagian A-C disiapkan berdasarkan spesifikasi yang diberikan.",
+  "title": "Perancangan Sistem Smart Grid untuk Pemantauan dan Prediksi Konsumsi Listrik Kos Mahasiswa di Surabaya Menggunakan Regresi Linear guna Mendukung Efisiensi Energi dan Penghematan Biaya Listrik",
+  "identity": {
+    "nrp": "[ISI NRP]",
+    "name": "[ISI NAMA MAHASISWA]",
+    "term": "Gasal 2026/2027"
+  },
+  "dataset": {
+    "publisher": "Greater London Authority; data berasal dari UK Power Networks Low Carbon London",
+    "source_url": "https://data.london.gov.uk/dataset/smartmeter-energy-consumption-data-in-london-households-vqm0d",
+    "license": "Creative Commons Attribution (London Datastore metadata)",
+    "doi": "Tidak tercantum pada laman sumber yang diperiksa.",
+    "local_file": "data/raw/LCL-June2015v2_0.csv",
+    "full_release_rows_approx": 167000000,
+    "local_rows": 1000000,
+    "unique_households": 30,
+    "timestamp_min": "2011-12-06T13:00:00",
+    "timestamp_max": "2014-02-28T00:00:00",
+    "valid_energy_rows": 999283,
+    "energy_missing_or_invalid": 29,
+    "duplicate_household_timestamps_removed": 688,
+    "valid_zero_energy": 45538,
+    "customer_categories": {
+      "Std": 999312
+    },
+    "interval_30min_count": 999117,
+    "other_interval_count": 165,
+    "sum_valid_kwh": 239356.1779874,
+    "quality": {
+      "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/LCL-June2015v2_0.csv",
+      "file_size_bytes": 50755532,
+      "raw_column_names": [
+        "LCLid",
+        "stdorToU",
+        "DateTime",
+        "KWH/hh (per half hour) "
+      ],
+      "normalized_column_names": [
+        "LCLid",
+        "stdorToU",
+        "DateTime",
+        "KWH/hh (per half hour)"
+      ],
+      "rows_before_cleaning": 1000000,
+      "invalid_timestamp_rows": 0,
+      "energy_missing_or_invalid_rows": 29,
+      "valid_zero_energy_rows": 45538,
+      "negative_energy_rows": 0,
+      "duplicate_household_timestamp_rows_removed": 688,
+      "rows_after_timestamp_and_duplicate_cleaning": 999312,
+      "rows_with_valid_numeric_energy_after_cleaning": 999283,
+      "unique_households": 30,
+      "customer_categories": {
+        "Std": 999312
+      },
+      "timestamp_min": "2011-12-06T13:00:00",
+      "timestamp_max": "2014-02-28T00:00:00",
+      "rows_with_valid_timestamp": 999312,
+      "interval_counts_minutes": {
+        "2.6666666666666665": 1,
+        "7.433333333333334": 2,
+        "7.45": 6,
+        "7.466666666666667": 2,
+        "13.666666666666666": 1,
+        "13.683333333333334": 10,
+        "13.7": 7,
+        "16.3": 7,
+        "16.316666666666666": 10,
+        "16.333333333333332": 1,
+        "22.533333333333335": 2,
+        "22.55": 6,
+        "22.566666666666666": 2,
+        "27.333333333333332": 1,
+        "30.0": 999117,
+        "60.0": 88,
+        "90.0": 4,
+        "150.0": 1,
+        "210.0": 1,
+        "270.0": 1,
+        "300.0": 4,
+        "330.0": 2,
+        "390.0": 1,
+        "1470.0": 5
+      },
+      "interval_30_minutes_count": 999117,
+      "interval_other_than_30_minutes_count": 165,
+      "zero_values_are_retained": true,
+      "missing_energy_fill_policy": "No fill; blank and non-numeric readings remain NaN and affected features/targets are excluded.",
+      "duplicate_policy": "For duplicate (LCLid, timestamp) rows, retain the first record in source order; record removed count.",
+      "timestamp_policy": "Parse naive source timestamps; validate target alignment using actual timestamp differences; do not synthesize DST intervals.",
+      "tariffs_audit": {
+        "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/Tariffs.xlsx",
+        "file_size_bytes": 245384,
+        "sheet_names": [
+          "Sheet1",
+          "Sheet2",
+          "Sheet3"
+        ],
+        "sheets": {
+          "Sheet1": {
+            "rows": 17520,
+            "columns": [
+              "TariffDateTime",
+              "Tariff"
+            ],
+            "timestamp_min": "2013-01-01T00:00:00",
+            "timestamp_max": "2013-12-31T23:30:00",
+            "invalid_timestamps": 0,
+            "categories": {
+              "Normal": 15072,
+              "Low": 1660,
+              "High": 788
+            },
+            "missing_by_column": {
+              "TariffDateTime": 0,
+              "Tariff": 0
+            }
+          },
+          "Sheet2": {
+            "rows": 0,
+            "columns": []
+          },
+          "Sheet3": {
+            "rows": 0,
+            "columns": []
+          }
+        },
+        "monetary_rate_present": false,
+        "join_decision": "Not joined to the local sample: it contains only Std customers, while workbook labels describe dynamic ToU periods in 2013."
+      },
+      "target_valid_examples": 992773,
+      "target_excluded_rows": 6539,
+      "target_alignment": "Next observed row for same LCLid is accepted only when timestamp equals current timestamp + 30 minutes.",
+      "split_counts": {
+        "train": 678694,
+        "validation": 162423,
+        "test": 151602
+      },
+      "high_energy_reference": {
+        "percentile": 0.95,
+        "threshold_kwh_per_30min": 0.849,
+        "fit_scope": "training partition only",
+        "meaning": "historical notification reference, not an electrical safety limit"
+      },
+      "valid_energy_sum_kwh": 239356.1779874,
+      "average_household_month_rows": 698,
+      "data_source_scope": "Only the supplied 1,000,000-row LCL-June2015v2_0.csv extract is analyzed; the 167-million-row full release is not copied or treated as local observations."
+    }
+  },
+  "tariffs": {
+    "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/Tariffs.xlsx",
+    "file_size_bytes": 245384,
+    "sheet_names": [
+      "Sheet1",
+      "Sheet2",
+      "Sheet3"
+    ],
+    "sheets": {
+      "Sheet1": {
+        "rows": 17520,
+        "columns": [
+          "TariffDateTime",
+          "Tariff"
+        ],
+        "timestamp_min": "2013-01-01T00:00:00",
+        "timestamp_max": "2013-12-31T23:30:00",
+        "invalid_timestamps": 0,
+        "categories": {
+          "Normal": 15072,
+          "Low": 1660,
+          "High": 788
+        },
+        "missing_by_column": {
+          "TariffDateTime": 0,
+          "Tariff": 0
+        }
+      },
+      "Sheet2": {
+        "rows": 0,
+        "columns": []
+      },
+      "Sheet3": {
+        "rows": 0,
+        "columns": []
+      }
+    },
+    "monetary_rate_present": false,
+    "join_decision": "Not joined to the local sample: it contains only Std customers, while workbook labels describe dynamic ToU periods in 2013."
+  },
+  "experiment": {
+    "target": "energy_kwh at the next exact +30 minute timestamp for the same LCLid",
+    "mode": "one-step-ahead; observed energy E(t) is available at prediction time",
+    "unit": "kWh per 30-minute interval",
+    "feature_names": [
+      "energy_t",
+      "energy_lag_1",
+      "energy_lag_2",
+      "energy_lag_4",
+      "energy_lag_48",
+      "energy_change_from_previous",
+      "energy_roll_mean_4",
+      "energy_roll_std_4",
+      "energy_roll_mean_48",
+      "energy_roll_std_48",
+      "hour_sin",
+      "hour_cos",
+      "weekday_sin",
+      "weekday_cos"
+    ],
+    "valid_examples": 992773,
+    "splits": {
+      "train": {
+        "observations": 678694,
+        "timestamp_min": "2011-12-07T13:00:00",
+        "timestamp_max": "2013-06-28T22:00:00",
+        "target_timestamp_max": "2013-06-28T22:30:00"
+      },
+      "validation": {
+        "observations": 162423,
+        "timestamp_min": "2013-06-28T23:00:00",
+        "timestamp_max": "2013-10-28T22:30:00",
+        "target_timestamp_max": "2013-10-28T23:00:00"
+      },
+      "test": {
+        "observations": 151602,
+        "timestamp_min": "2013-10-28T23:30:00",
+        "timestamp_max": "2014-02-27T23:30:00",
+        "target_timestamp_max": "2014-02-28T00:00:00"
+      }
+    },
+    "temporal_boundaries": {
+      "train_end": "2013-06-28T22:30:00",
+      "validation_end": "2013-10-28T23:00:00"
+    },
+    "metrics_validation": [
+      {
+        "model": "persistence_same_household",
+        "MAE_kWh_per_30min": 0.07838544416232936,
+        "RMSE_kWh_per_30min": 0.17874864232154208,
+        "R2": 0.33108932417405146,
+        "observations": 162423
+      },
+      {
+        "model": "linear_regression",
+        "MAE_kWh_per_30min": 0.07508756220340729,
+        "RMSE_kWh_per_30min": 0.15937837241849512,
+        "R2": 0.4682084918022156,
+        "observations": 162423
+      }
+    ],
+    "metrics_test": [
+      {
+        "model": "persistence_same_household",
+        "MAE_kWh_per_30min": 0.10390944706562216,
+        "RMSE_kWh_per_30min": 0.2635929081218987,
+        "R2": 0.6525621729499884,
+        "observations": 151602
+      },
+      {
+        "model": "linear_regression",
+        "MAE_kWh_per_30min": 0.10604695975780487,
+        "RMSE_kWh_per_30min": 0.2463241210355595,
+        "R2": 0.6965944170951843,
+        "observations": 151602
+      }
+    ],
+    "train_only_fit": true,
+    "random_state": 42,
+    "linear_regression": "sklearn.linear_model.LinearRegression",
+    "run_started_unix": 1792813486.8030348,
+    "mean_household_month_energy_kwh": 342.9171604404011,
+    "mean_household_month_observations": 698
+  },
+  "anomalies": {
+    "method": "IsolationForest",
+    "fit_scope": "train rows only; deterministic sample",
+    "train_rows": 678694,
+    "fit_sample_rows": 100000,
+    "random_state": 42,
+    "test_rows": 151602,
+    "sensitivity": {
+      "0.005": {
+        "flagged_count": 991,
+        "flagged_percent": 0.6536853075816942,
+        "decision_score_threshold": -0.597060126862668,
+        "score_min": -0.7286583628024593,
+        "score_median": -0.39870342344290133,
+        "score_max": -0.3675501257222348,
+        "examples": [
+          {
+            "timestamp": "2013-12-24T01:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.6001699373114077,
+            "energy_kwh_per_30min": 2.0329999923706055
+          },
+          {
+            "timestamp": "2014-01-01T01:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.6080090483168721,
+            "energy_kwh_per_30min": 1.8569999933242798
+          },
+          {
+            "timestamp": "2014-01-11T01:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.6121882120396379,
+            "energy_kwh_per_30min": 2.9639999866485596
+          },
+          {
+            "timestamp": "2014-01-11T02:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.6256808310070374,
+            "energy_kwh_per_30min": 2.0190000534057617
+          },
+          {
+            "timestamp": "2014-02-07T07:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.6317685262597375,
+            "energy_kwh_per_30min": 0.15600000321865082
+          },
+          {
+            "timestamp": "2014-02-13T02:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.6051215172909757,
+            "energy_kwh_per_30min": 1.9589999914169312
+          },
+          {
+            "timestamp": "2013-12-25T13:30:00",
+            "household_pseudonym": "a842e3d91b",
+            "score": -0.6455336609580721,
+            "energy_kwh_per_30min": 3.7839999198913574
+          },
+          {
+            "timestamp": "2013-12-25T14:00:00",
+            "household_pseudonym": "a842e3d91b",
+            "score": -0.6715190962820058,
+            "energy_kwh_per_30min": 2.9200000762939453
+          },
+          {
+            "timestamp": "2013-12-25T14:30:00",
+            "household_pseudonym": "a842e3d91b",
+            "score": -0.6660174871795641,
+            "energy_kwh_per_30min": 1.75600004196167
+          },
+          {
+            "timestamp": "2013-12-25T15:00:00",
+            "household_pseudonym": "a842e3d91b",
+            "score": -0.6166760499000632,
+            "energy_kwh_per_30min": 1.2640000581741333
+          },
+          {
+            "timestamp": "2013-12-25T15:30:00",
+            "household_pseudonym": "a842e3d91b",
+            "score": -0.6421716574017456,
+            "energy_kwh_per_30min": 1.565999984741211
+          },
+          {
+            "timestamp": "2013-11-21T13:00:00",
+            "household_pseudonym": "e106a7ec81",
+            "score": -0.6187783618059176,
+            "energy_kwh_per_30min": 2.61299991607666
+          }
+        ],
+        "interpretation": "Unusual consumption pattern for human review; no verified incident labels."
+      },
+      "0.01": {
+        "flagged_count": 1886,
+        "flagged_percent": 1.244046912309864,
+        "decision_score_threshold": -0.5643847253327907,
+        "score_min": -0.7286583628024593,
+        "score_median": -0.39870342344290133,
+        "score_max": -0.3675501257222348,
+        "examples": [
+          {
+            "timestamp": "2014-01-27T19:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5767888668623122,
+            "energy_kwh_per_30min": 2.4100000858306885
+          },
+          {
+            "timestamp": "2014-01-27T19:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5728168396425544,
+            "energy_kwh_per_30min": 1.406999945640564
+          },
+          {
+            "timestamp": "2014-02-02T22:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5701210316612938,
+            "energy_kwh_per_30min": 1.496000051498413
+          },
+          {
+            "timestamp": "2013-11-18T00:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5799332874509241,
+            "energy_kwh_per_30min": 2.5220000743865967
+          },
+          {
+            "timestamp": "2013-11-18T01:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5868196190147894,
+            "energy_kwh_per_30min": 2.6410000324249268
+          },
+          {
+            "timestamp": "2013-11-18T01:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5940715094252627,
+            "energy_kwh_per_30min": 1.5570000410079956
+          },
+          {
+            "timestamp": "2013-11-18T02:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5935398042041198,
+            "energy_kwh_per_30min": 1.840999960899353
+          },
+          {
+            "timestamp": "2013-11-19T00:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5717261444318393,
+            "energy_kwh_per_30min": 2.6480000019073486
+          },
+          {
+            "timestamp": "2013-11-19T01:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5655909224115292,
+            "energy_kwh_per_30min": 1.940000057220459
+          },
+          {
+            "timestamp": "2013-11-20T00:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5726355164146901,
+            "energy_kwh_per_30min": 2.6630001068115234
+          },
+          {
+            "timestamp": "2013-11-20T01:30:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5652864039545987,
+            "energy_kwh_per_30min": 1.5410000085830688
+          },
+          {
+            "timestamp": "2013-11-20T08:00:00",
+            "household_pseudonym": "e29946453d",
+            "score": -0.5700450199932116,
+            "energy_kwh_per_30min": 1.4800000190734863
+          }
+        ],
+        "interpretation": "Unusual consumption pattern for human review; no verified incident labels."
+      },
+      "0.02": {
+        "flagged_count": 3629,
+        "flagged_percent": 2.3937678922441656,
+        "decision_score_threshold": -0.534909270055948,
+        "score_min": -0.7286583628024593,
+        "score_median": -0.39870342344290133,
+        "score_max": -0.3675501257222348,
+        "examples": [
+          {
+            "timestamp": "2013-12-03T20:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5372118360621231,
+            "energy_kwh_per_30min": 1.1339999437332153
+          },
+          {
+            "timestamp": "2013-12-08T20:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5555283015212152,
+            "energy_kwh_per_30min": 1.2589999437332153
+          },
+          {
+            "timestamp": "2013-12-08T21:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5517320854260518,
+            "energy_kwh_per_30min": 1.2710000276565552
+          },
+          {
+            "timestamp": "2014-01-26T19:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5436870577438219,
+            "energy_kwh_per_30min": 1.9170000553131104
+          },
+          {
+            "timestamp": "2014-01-26T20:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5570215064772908,
+            "energy_kwh_per_30min": 1.5379999876022339
+          },
+          {
+            "timestamp": "2014-01-27T19:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5767888668623122,
+            "energy_kwh_per_30min": 2.4100000858306885
+          },
+          {
+            "timestamp": "2014-01-27T19:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5728168396425544,
+            "energy_kwh_per_30min": 1.406999945640564
+          },
+          {
+            "timestamp": "2014-01-27T20:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5589988569567722,
+            "energy_kwh_per_30min": 1.3320000171661377
+          },
+          {
+            "timestamp": "2014-02-02T21:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5436807730597111,
+            "energy_kwh_per_30min": 1.9910000562667847
+          },
+          {
+            "timestamp": "2014-02-02T21:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5392626661301263,
+            "energy_kwh_per_30min": 2.117000102996826
+          },
+          {
+            "timestamp": "2014-02-02T22:00:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5585209188656803,
+            "energy_kwh_per_30min": 2.447000026702881
+          },
+          {
+            "timestamp": "2014-02-02T22:30:00",
+            "household_pseudonym": "d92c43802a",
+            "score": -0.5701210316612938,
+            "energy_kwh_per_30min": 1.496000051498413
+          }
+        ],
+        "interpretation": "Unusual consumption pattern for human review; no verified incident labels."
+      }
+    }
+  },
+  "cost_scenarios": [
+    {
+      "reduction_percent": 0,
+      "mean_household_month_kwh": 342.9171604404011,
+      "tariff_idr_per_kwh": 1444.7,
+      "estimated_cost_idr_per_household_month": 495412.42168824753,
+      "status": "simulation; London energy x assumed Indonesian household tariff"
+    },
+    {
+      "reduction_percent": 5,
+      "mean_household_month_kwh": 325.771302418381,
+      "tariff_idr_per_kwh": 1444.7,
+      "estimated_cost_idr_per_household_month": 470641.8006038351,
+      "status": "simulation; London energy x assumed Indonesian household tariff"
+    },
+    {
+      "reduction_percent": 10,
+      "mean_household_month_kwh": 308.625444396361,
+      "tariff_idr_per_kwh": 1444.7,
+      "estimated_cost_idr_per_household_month": 445871.1795194227,
+      "status": "simulation; London energy x assumed Indonesian household tariff"
+    }
+  ],
+  "bfs": {
+    "source": "synthetic illustrative corridor graph, not real sensor data",
+    "state": "technician current node",
+    "action": "move to adjacent node",
+    "goal": "Kamar 2 alert",
+    "cost": "1 per edge; all edges equal",
+    "graph": {
+      "Lobi": [
+        "Koridor A",
+        "Koridor B"
+      ],
+      "Koridor A": [
+        "Lobi",
+        "Kamar 1",
+        "Kamar 2"
+      ],
+      "Koridor B": [
+        "Lobi",
+        "Kamar 3"
+      ],
+      "Kamar 1": [
+        "Koridor A"
+      ],
+      "Kamar 2": [
+        "Koridor A"
+      ],
+      "Kamar 3": [
+        "Koridor B"
+      ]
+    },
+    "path": [
+      "Lobi",
+      "Koridor A",
+      "Kamar 2"
+    ],
+    "explored_nodes": [
+      "Lobi",
+      "Koridor A",
+      "Koridor B",
+      "Kamar 1",
+      "Kamar 2"
+    ],
+    "explored_count": 5,
+    "complete": "yes for reachable goal in a finite graph",
+    "optimal": "shortest edge-count path for an unweighted graph",
+    "complexity": {
+      "time": "O(V+E)",
+      "space": "O(V)"
+    },
+    "weighted_graph_note": "For unequal edge costs, use Dijkstra or A*."
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "title": "SmartMeter Energy Consumption Data in London Households",
+      "publisher": "Greater London Authority / UK Power Networks",
+      "publication_date": "2022-04-07",
+      "url": "https://data.london.gov.uk/dataset/smartmeter-energy-consumption-data-in-london-households-vqm0d",
+      "license_or_status": "Creative Commons Attribution",
+      "used_for": "Dataset scope units source and license"
+    },
+    {
+      "id": "S2",
+      "title": "SmartMeter Energy Consumption Data in London Households",
+      "publisher": "National Data Library / Greater London Authority",
+      "publication_date": "2026-09-25",
+      "url": "https://www.data.gov.uk/dataset/df8e55d4-c6d0-498e-abd8-f4c678766cbe/smartmeter-energy-consumption-data-in-london-households1",
+      "license_or_status": "Open Government Licence v3.0 except where otherwise stated",
+      "used_for": "Full release count tariff groups flat tariff and period"
+    },
+    {
+      "id": "S3",
+      "title": "Sistem Monitoring Penggunaan Daya Listrik Berbasis IoT Studi Kasus Pembagian Tagihan Listrik Penghuni Kost",
+      "publisher": "Kusumah Jayusman Hakim",
+      "publication_date": "2023-12-01",
+      "url": "https://doi.org/10.58761/jurtikstmikbandung.v12.i2.122",
+      "license_or_status": "CC BY 4.0",
+      "used_for": "Prior work on monitoring and proportional bill sharing"
+    },
+    {
+      "id": "S4",
+      "title": "Rancang Bangun Alat Monitoring Pemakaian Tarif Listrik dan Kontrol Daya Listrik Pada Rumah Kos Berbasis IoT",
+      "publisher": "Haryudo Alfian Kholis",
+      "publication_date": "2021-07-27",
+      "url": "https://doi.org/10.26740/jte.v10n3.p661-670",
+      "license_or_status": "Journal article",
+      "used_for": "Prior work on room monitoring and remote control"
+    },
+    {
+      "id": "S5",
+      "title": "Detail Tarif Listrik Berdasarkan Golongan Daya dan Jenisnya",
+      "publisher": "PT PLN Persero",
+      "publication_date": "2025-12",
+      "url": "https://web.pln.co.id/media/2025/12/tarif-listrik",
+      "license_or_status": "Official PLN page",
+      "used_for": "Assumed R1 1300VA tariff reference"
+    },
+    {
+      "id": "S6",
+      "title": "Jaga Daya Beli dan Daya Saing Industri Menteri ESDM Tarif Listrik TW IV Tetap",
+      "publisher": "Kementerian ESDM",
+      "publication_date": "2026-09-30",
+      "url": "https://gatrik.esdm.go.id/berita/jaga-daya-beli-dan-daya-saing-industri-menteri-esdm-tarif-listrik-tw-iv-tetap",
+      "license_or_status": "Government announcement",
+      "used_for": "Current Q4 2026 tariff status"
+    },
+    {
+      "id": "S7",
+      "title": "LinearRegression",
+      "publisher": "scikit-learn developers",
+      "publication_date": "current",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html",
+      "license_or_status": "Documentation",
+      "used_for": "Core model implementation"
+    },
+    {
+      "id": "S8",
+      "title": "IsolationForest",
+      "publisher": "scikit-learn developers",
+      "publication_date": "current",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html",
+      "license_or_status": "Documentation",
+      "used_for": "Secondary anomaly method"
+    },
+    {
+      "id": "S9",
+      "title": "Berbeda dengan Pulsa Seluler Begini Cara Hitung Token Listrik Prabayar PLN",
+      "publisher": "PT PLN Persero",
+      "publication_date": "2026-01-27",
+      "url": "https://web.pln.co.id/cms/media/siaran-pers/2026/01/cara-hitung-token-listrik-prabayar-pln",
+      "license_or_status": "Official PLN press release",
+      "used_for": "Exact R-1 1300VA reference rate Rp1444.70 per kWh"
+    }
+  ],
+  "figures": [
+    "outputs/figures/Arsitektur_SmartGrid_Kos_Mahasiswa_LONDON.png",
+    "outputs/figures/actual_vs_predicted.png",
+    "outputs/figures/residuals.png",
+    "outputs/figures/time_series_example.png",
+    "outputs/figures/anomaly_example.png",
+    "outputs/figures/cost_scenarios.png"
+  ]
+}

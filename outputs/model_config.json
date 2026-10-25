@@ -1,0 +1,65 @@
+{
+  "config": {
+    "data": {
+      "meter_file": "data/raw/LCL-June2015v2_0.csv",
+      "tariffs_file": "data/raw/Tariffs.xlsx"
+    },
+    "model": {
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "horizon_minutes": 30,
+      "lag_intervals": [
+        1,
+        2,
+        4,
+        48
+      ],
+      "rolling_windows": [
+        4,
+        48
+      ],
+      "random_state": 42,
+      "anomaly_sample_rows": 100000,
+      "anomaly_contamination": [
+        0.005,
+        0.01,
+        0.02
+      ],
+      "high_energy_percentile": 0.95
+    },
+    "economics": {
+      "tariff_idr_per_kwh": 1444.7,
+      "customer_class": "R-1/TR non-subsidi 1.300 VA (asumsi simulasi)",
+      "source_url": "https://web.pln.co.id/media/siaran-pers/2026/01/cara-hitung-token-listrik-prabayar-pln",
+      "source_note": "PLN menyebut Rp1.444,70/kWh untuk pelanggan rumah tangga 1.300 VA; asumsi, bukan tarif kontrak kos.",
+      "access_date": "2026-10-24"
+    },
+    "report": {
+      "title": "Perancangan Sistem Smart Grid untuk Pemantauan dan Prediksi Konsumsi Listrik Kos Mahasiswa di Surabaya",
+      "student_nrp": "[ISI NRP]",
+      "student_name": "[ISI NAMA MAHASISWA]",
+      "course": "ETS Teknologi Berbasis Komputer",
+      "term": "Gasal 2026/2027",
+      "video_url": "[ISI SETELAH VIDEO DIUNGGAH]"
+    }
+  },
+  "model_class": "sklearn.linear_model.LinearRegression",
+  "run_duration_seconds": 14.74769902229309,
+  "python_seed": 42,
+  "features": [
+    "energy_t",
+    "energy_lag_1",
+    "energy_lag_2",
+    "energy_lag_4",
+    "energy_lag_48",
+    "energy_change_from_previous",
+    "energy_roll_mean_4",
+    "energy_roll_std_4",
+    "energy_roll_mean_48",
+    "energy_roll_std_48",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos"
+  ]
+}

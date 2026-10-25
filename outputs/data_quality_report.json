@@ -1,0 +1,120 @@
+{
+  "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/LCL-June2015v2_0.csv",
+  "file_size_bytes": 50755532,
+  "raw_column_names": [
+    "LCLid",
+    "stdorToU",
+    "DateTime",
+    "KWH/hh (per half hour) "
+  ],
+  "normalized_column_names": [
+    "LCLid",
+    "stdorToU",
+    "DateTime",
+    "KWH/hh (per half hour)"
+  ],
+  "rows_before_cleaning": 1000000,
+  "invalid_timestamp_rows": 0,
+  "energy_missing_or_invalid_rows": 29,
+  "valid_zero_energy_rows": 45538,
+  "negative_energy_rows": 0,
+  "duplicate_household_timestamp_rows_removed": 688,
+  "rows_after_timestamp_and_duplicate_cleaning": 999312,
+  "rows_with_valid_numeric_energy_after_cleaning": 999283,
+  "unique_households": 30,
+  "customer_categories": {
+    "Std": 999312
+  },
+  "timestamp_min": "2011-12-06T13:00:00",
+  "timestamp_max": "2014-02-28T00:00:00",
+  "rows_with_valid_timestamp": 999312,
+  "interval_counts_minutes": {
+    "2.6666666666666665": 1,
+    "7.433333333333334": 2,
+    "7.45": 6,
+    "7.466666666666667": 2,
+    "13.666666666666666": 1,
+    "13.683333333333334": 10,
+    "13.7": 7,
+    "16.3": 7,
+    "16.316666666666666": 10,
+    "16.333333333333332": 1,
+    "22.533333333333335": 2,
+    "22.55": 6,
+    "22.566666666666666": 2,
+    "27.333333333333332": 1,
+    "30.0": 999117,
+    "60.0": 88,
+    "90.0": 4,
+    "150.0": 1,
+    "210.0": 1,
+    "270.0": 1,
+    "300.0": 4,
+    "330.0": 2,
+    "390.0": 1,
+    "1470.0": 5
+  },
+  "interval_30_minutes_count": 999117,
+  "interval_other_than_30_minutes_count": 165,
+  "zero_values_are_retained": true,
+  "missing_energy_fill_policy": "No fill; blank and non-numeric readings remain NaN and affected features/targets are excluded.",
+  "duplicate_policy": "For duplicate (LCLid, timestamp) rows, retain the first record in source order; record removed count.",
+  "timestamp_policy": "Parse naive source timestamps; validate target alignment using actual timestamp differences; do not synthesize DST intervals.",
+  "tariffs_audit": {
+    "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/Tariffs.xlsx",
+    "file_size_bytes": 245384,
+    "sheet_names": [
+      "Sheet1",
+      "Sheet2",
+      "Sheet3"
+    ],
+    "sheets": {
+      "Sheet1": {
+        "rows": 17520,
+        "columns": [
+          "TariffDateTime",
+          "Tariff"
+        ],
+        "timestamp_min": "2013-01-01T00:00:00",
+        "timestamp_max": "2013-12-31T23:30:00",
+        "invalid_timestamps": 0,
+        "categories": {
+          "Normal": 15072,
+          "Low": 1660,
+          "High": 788
+        },
+        "missing_by_column": {
+          "TariffDateTime": 0,
+          "Tariff": 0
+        }
+      },
+      "Sheet2": {
+        "rows": 0,
+        "columns": []
+      },
+      "Sheet3": {
+        "rows": 0,
+        "columns": []
+      }
+    },
+    "monetary_rate_present": false,
+    "join_decision": "Not joined to the local sample: it contains only Std customers, while workbook labels describe dynamic ToU periods in 2013."
+  },
+  "target_valid_examples": 992773,
+  "target_excluded_rows": 6539,
+  "target_alignment": "Next observed row for same LCLid is accepted only when timestamp equals current timestamp + 30 minutes.",
+  "split_counts": {
+    "train": 678694,
+    "validation": 162423,
+    "test": 151602
+  },
+  "high_energy_reference": {
+    "percentile": 0.95,
+    "threshold_kwh_per_30min": 0.849,
+    "fit_scope": "training partition only",
+    "meaning": "historical notification reference, not an electrical safety limit"
+  },
+  "valid_energy_sum_kwh": 239356.1779874,
+  "average_household_month_rows": 698,
+  "data_source_scope": "Only the supplied 1,000,000-row LCL-June2015v2_0.csv extract is analyzed; the 167-million-row full release is not copied or treated as local observations."
+}

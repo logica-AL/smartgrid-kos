@@ -1,0 +1,259 @@
+{
+  "method": "IsolationForest",
+  "fit_scope": "train rows only; deterministic sample",
+  "train_rows": 678694,
+  "fit_sample_rows": 100000,
+  "random_state": 42,
+  "test_rows": 151602,
+  "sensitivity": {
+    "0.005": {
+      "flagged_count": 991,
+      "flagged_percent": 0.6536853075816942,
+      "decision_score_threshold": -0.597060126862668,
+      "score_min": -0.7286583628024593,
+      "score_median": -0.39870342344290133,
+      "score_max": -0.3675501257222348,
+      "examples": [
+        {
+          "timestamp": "2013-12-24T01:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.6001699373114077,
+          "energy_kwh_per_30min": 2.0329999923706055
+        },
+        {
+          "timestamp": "2014-01-01T01:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.6080090483168721,
+          "energy_kwh_per_30min": 1.8569999933242798
+        },
+        {
+          "timestamp": "2014-01-11T01:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.6121882120396379,
+          "energy_kwh_per_30min": 2.9639999866485596
+        },
+        {
+          "timestamp": "2014-01-11T02:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.6256808310070374,
+          "energy_kwh_per_30min": 2.0190000534057617
+        },
+        {
+          "timestamp": "2014-02-07T07:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.6317685262597375,
+          "energy_kwh_per_30min": 0.15600000321865082
+        },
+        {
+          "timestamp": "2014-02-13T02:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.6051215172909757,
+          "energy_kwh_per_30min": 1.9589999914169312
+        },
+        {
+          "timestamp": "2013-12-25T13:30:00",
+          "household_pseudonym": "a842e3d91b",
+          "score": -0.6455336609580721,
+          "energy_kwh_per_30min": 3.7839999198913574
+        },
+        {
+          "timestamp": "2013-12-25T14:00:00",
+          "household_pseudonym": "a842e3d91b",
+          "score": -0.6715190962820058,
+          "energy_kwh_per_30min": 2.9200000762939453
+        },
+        {
+          "timestamp": "2013-12-25T14:30:00",
+          "household_pseudonym": "a842e3d91b",
+          "score": -0.6660174871795641,
+          "energy_kwh_per_30min": 1.75600004196167
+        },
+        {
+          "timestamp": "2013-12-25T15:00:00",
+          "household_pseudonym": "a842e3d91b",
+          "score": -0.6166760499000632,
+          "energy_kwh_per_30min": 1.2640000581741333
+        },
+        {
+          "timestamp": "2013-12-25T15:30:00",
+          "household_pseudonym": "a842e3d91b",
+          "score": -0.6421716574017456,
+          "energy_kwh_per_30min": 1.565999984741211
+        },
+        {
+          "timestamp": "2013-11-21T13:00:00",
+          "household_pseudonym": "e106a7ec81",
+          "score": -0.6187783618059176,
+          "energy_kwh_per_30min": 2.61299991607666
+        }
+      ],
+      "interpretation": "Unusual consumption pattern for human review; no verified incident labels."
+    },
+    "0.01": {
+      "flagged_count": 1886,
+      "flagged_percent": 1.244046912309864,
+      "decision_score_threshold": -0.5643847253327907,
+      "score_min": -0.7286583628024593,
+      "score_median": -0.39870342344290133,
+      "score_max": -0.3675501257222348,
+      "examples": [
+        {
+          "timestamp": "2014-01-27T19:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5767888668623122,
+          "energy_kwh_per_30min": 2.4100000858306885
+        },
+        {
+          "timestamp": "2014-01-27T19:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5728168396425544,
+          "energy_kwh_per_30min": 1.406999945640564
+        },
+        {
+          "timestamp": "2014-02-02T22:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5701210316612938,
+          "energy_kwh_per_30min": 1.496000051498413
+        },
+        {
+          "timestamp": "2013-11-18T00:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5799332874509241,
+          "energy_kwh_per_30min": 2.5220000743865967
+        },
+        {
+          "timestamp": "2013-11-18T01:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5868196190147894,
+          "energy_kwh_per_30min": 2.6410000324249268
+        },
+        {
+          "timestamp": "2013-11-18T01:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5940715094252627,
+          "energy_kwh_per_30min": 1.5570000410079956
+        },
+        {
+          "timestamp": "2013-11-18T02:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5935398042041198,
+          "energy_kwh_per_30min": 1.840999960899353
+        },
+        {
+          "timestamp": "2013-11-19T00:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5717261444318393,
+          "energy_kwh_per_30min": 2.6480000019073486
+        },
+        {
+          "timestamp": "2013-11-19T01:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5655909224115292,
+          "energy_kwh_per_30min": 1.940000057220459
+        },
+        {
+          "timestamp": "2013-11-20T00:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5726355164146901,
+          "energy_kwh_per_30min": 2.6630001068115234
+        },
+        {
+          "timestamp": "2013-11-20T01:30:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5652864039545987,
+          "energy_kwh_per_30min": 1.5410000085830688
+        },
+        {
+          "timestamp": "2013-11-20T08:00:00",
+          "household_pseudonym": "e29946453d",
+          "score": -0.5700450199932116,
+          "energy_kwh_per_30min": 1.4800000190734863
+        }
+      ],
+      "interpretation": "Unusual consumption pattern for human review; no verified incident labels."
+    },
+    "0.02": {
+      "flagged_count": 3629,
+      "flagged_percent": 2.3937678922441656,
+      "decision_score_threshold": -0.534909270055948,
+      "score_min": -0.7286583628024593,
+      "score_median": -0.39870342344290133,
+      "score_max": -0.3675501257222348,
+      "examples": [
+        {
+          "timestamp": "2013-12-03T20:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5372118360621231,
+          "energy_kwh_per_30min": 1.1339999437332153
+        },
+        {
+          "timestamp": "2013-12-08T20:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5555283015212152,
+          "energy_kwh_per_30min": 1.2589999437332153
+        },
+        {
+          "timestamp": "2013-12-08T21:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5517320854260518,
+          "energy_kwh_per_30min": 1.2710000276565552
+        },
+        {
+          "timestamp": "2014-01-26T19:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5436870577438219,
+          "energy_kwh_per_30min": 1.9170000553131104
+        },
+        {
+          "timestamp": "2014-01-26T20:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5570215064772908,
+          "energy_kwh_per_30min": 1.5379999876022339
+        },
+        {
+          "timestamp": "2014-01-27T19:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5767888668623122,
+          "energy_kwh_per_30min": 2.4100000858306885
+        },
+        {
+          "timestamp": "2014-01-27T19:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5728168396425544,
+          "energy_kwh_per_30min": 1.406999945640564
+        },
+        {
+          "timestamp": "2014-01-27T20:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5589988569567722,
+          "energy_kwh_per_30min": 1.3320000171661377
+        },
+        {
+          "timestamp": "2014-02-02T21:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5436807730597111,
+          "energy_kwh_per_30min": 1.9910000562667847
+        },
+        {
+          "timestamp": "2014-02-02T21:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5392626661301263,
+          "energy_kwh_per_30min": 2.117000102996826
+        },
+        {
+          "timestamp": "2014-02-02T22:00:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5585209188656803,
+          "energy_kwh_per_30min": 2.447000026702881
+        },
+        {
+          "timestamp": "2014-02-02T22:30:00",
+          "household_pseudonym": "d92c43802a",
+          "score": -0.5701210316612938,
+          "energy_kwh_per_30min": 1.496000051498413
+        }
+      ],
+      "interpretation": "Unusual consumption pattern for human review; no verified incident labels."
+    }
+  }
+}

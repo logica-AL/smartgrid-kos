@@ -1,0 +1,4 @@
+reduction_percent,mean_household_month_kwh,tariff_idr_per_kwh,estimated_cost_idr_per_household_month,status
+0,342.9171604404011,1444.7,495412.42168824753,simulation; London energy x assumed Indonesian household tariff
+5,325.771302418381,1444.7,470641.8006038351,simulation; London energy x assumed Indonesian household tariff
+10,308.625444396361,1444.7,445871.17951942276,simulation; London energy x assumed Indonesian household tariff

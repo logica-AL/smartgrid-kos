@@ -1,0 +1,84 @@
+{
+  "target": "energy_kwh at the next exact +30 minute timestamp for the same LCLid",
+  "mode": "one-step-ahead; observed energy E(t) is available at prediction time",
+  "unit": "kWh per 30-minute interval",
+  "feature_names": [
+    "energy_t",
+    "energy_lag_1",
+    "energy_lag_2",
+    "energy_lag_4",
+    "energy_lag_48",
+    "energy_change_from_previous",
+    "energy_roll_mean_4",
+    "energy_roll_std_4",
+    "energy_roll_mean_48",
+    "energy_roll_std_48",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos"
+  ],
+  "valid_examples": 992773,
+  "splits": {
+    "train": {
+      "observations": 678694,
+      "timestamp_min": "2011-12-07T13:00:00",
+      "timestamp_max": "2013-06-28T22:00:00",
+      "target_timestamp_max": "2013-06-28T22:30:00"
+    },
+    "validation": {
+      "observations": 162423,
+      "timestamp_min": "2013-06-28T23:00:00",
+      "timestamp_max": "2013-10-28T22:30:00",
+      "target_timestamp_max": "2013-10-28T23:00:00"
+    },
+    "test": {
+      "observations": 151602,
+      "timestamp_min": "2013-10-28T23:30:00",
+      "timestamp_max": "2014-02-27T23:30:00",
+      "target_timestamp_max": "2014-02-28T00:00:00"
+    }
+  },
+  "temporal_boundaries": {
+    "train_end": "2013-06-28T22:30:00",
+    "validation_end": "2013-10-28T23:00:00"
+  },
+  "metrics_validation": [
+    {
+      "model": "persistence_same_household",
+      "MAE_kWh_per_30min": 0.07838544416232936,
+      "RMSE_kWh_per_30min": 0.17874864232154208,
+      "R2": 0.33108932417405146,
+      "observations": 162423
+    },
+    {
+      "model": "linear_regression",
+      "MAE_kWh_per_30min": 0.07508756220340729,
+      "RMSE_kWh_per_30min": 0.15937837241849512,
+      "R2": 0.4682084918022156,
+      "observations": 162423
+    }
+  ],
+  "metrics_test": [
+    {
+      "model": "persistence_same_household",
+      "MAE_kWh_per_30min": 0.10390944706562216,
+      "RMSE_kWh_per_30min": 0.2635929081218987,
+      "R2": 0.6525621729499884,
+      "observations": 151602
+    },
+    {
+      "model": "linear_regression",
+      "MAE_kWh_per_30min": 0.10604695975780487,
+      "RMSE_kWh_per_30min": 0.2463241210355595,
+      "R2": 0.6965944170951843,
+      "observations": 151602
+    }
+  ],
+  "train_only_fit": true,
+  "random_state": 42,
+  "linear_regression": "sklearn.linear_model.LinearRegression",
+  "run_started_unix": 1792814065.33567,
+  "mean_household_month_energy_kwh": 342.9171604404011,
+  "mean_household_month_observations": 698
+}

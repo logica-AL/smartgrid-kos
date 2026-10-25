@@ -1,0 +1,18 @@
+report_claim,source_artifact,source_field
+Raw local observations,outputs/data_quality_report.json,rows_before_cleaning
+Unique households,outputs/data_quality_report.json,unique_households
+Energy missing or invalid,outputs/data_quality_report.json,energy_missing_or_invalid_rows
+Duplicate timestamps removed,outputs/data_quality_report.json,duplicate_household_timestamp_rows_removed
+Valid energy rows and zero readings,outputs/data_quality_report.json,rows_with_valid_numeric_energy_after_cleaning; valid_zero_energy_rows
+Observed timestamp period and interval frequencies,outputs/data_quality_report.json,timestamp_min; timestamp_max; interval_counts_minutes
+"Tariff workbook sheets, schema, dates, and categories",outputs/data_quality_report.json,tariffs_audit.sheets.*
+Target valid examples and exact horizon,outputs/metrics.json,valid_examples; target
+Train/validation/test counts and boundaries,outputs/metrics.json,splits.*.observations; temporal_boundaries
+Historical high-use reference,outputs/data_quality_report.json,high_energy_reference.percentile; threshold_kwh_per_30min
+Model MAE/RMSE/R2,outputs/model_comparison.csv,MAE_kWh_per_30min; RMSE_kWh_per_30min; R2
+"Anomaly sample, seed, counts, scores",outputs/anomaly_summary.json,fit_sample_rows; random_state; sensitivity.*
+Monthly cost scenarios and assumed rate,outputs/cost_scenarios.csv,mean_household_month_kwh; tariff_idr_per_kwh; estimated_cost_idr_per_household_month
+Tariff class and dated source,config.yaml,economics.customer_class; source_url; access_date
+Prior-study results and publication dates,outputs/source_register.csv,S3; S4
+Full London release metadata and DOI statement,outputs/report_facts.json,dataset.full_release_rows_approx; dataset.license; dataset.doi
+BFS path and explored nodes,outputs/bfs_result.json,path; explored_count; complexity

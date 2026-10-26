@@ -5,6 +5,8 @@ import pandas as pd
 import yaml
 
 from data_pipeline import audit_tariffs, read_meter_file, write_json
+from data_insights import build_data_insights
+from figures import draw_architecture
 
 
 def main() -> None:
@@ -27,8 +29,11 @@ def main() -> None:
     report["household_frequency_file"] = "outputs/household_frequency.csv"
     report["data_source_scope"] = "Only the supplied 1,000,000-row LCL-June2015v2_0.csv extract is analyzed; the 167-million-row full release is not copied or treated as local observations."
     write_json(root / "outputs" / "data_quality_report.json", report)
+    insights = build_data_insights(meter, report, root / "outputs")
+    draw_architecture(root / "outputs" / "figures" / "Arsitektur_SmartGrid_Kos_Mahasiswa_LONDON.png")
     print({"rows": report["rows_before_cleaning"], "after": report["rows_after_timestamp_and_duplicate_cleaning"],
-           "households": report["unique_households"], "period": [report["timestamp_min"], report["timestamp_max"]]})
+           "households": report["unique_households"], "period": [report["timestamp_min"], report["timestamp_max"]],
+           "data_insights": insights["temporal_profiles"]})
 
 
 if __name__ == "__main__":

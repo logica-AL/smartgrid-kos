@@ -13,14 +13,15 @@ model:
   high_energy_percentile: 0.95
 economics:
   tariff_idr_per_kwh: 1444.70
+  minimum_month_coverage_fraction: 0.95
   customer_class: "R-1/TR non-subsidi 1.300 VA (asumsi simulasi)"
   source_url: https://web.pln.co.id/media/siaran-pers/2026/01/cara-hitung-token-listrik-prabayar-pln
   source_note: "PLN menyebut Rp1.444,70/kWh untuk pelanggan rumah tangga 1.300 VA; asumsi, bukan tarif kontrak kos."
   access_date: "2026-10-24"
 report:
   title: "Perancangan Sistem Smart Grid untuk Pemantauan dan Prediksi Konsumsi Listrik Kos Mahasiswa di Surabaya"
-  student_nrp: "[ISI NRP]"
-  student_name: "[ISI NAMA MAHASISWA]"
+  student_nrp: "ISI_NRP"
+  student_name: "ISI_NAMA_MAHASISWA"
   course: "ETS Teknologi Berbasis Komputer"
   term: "Gasal 2026/2027"
   video_url: "[ISI SETELAH VIDEO DIUNGGAH]"

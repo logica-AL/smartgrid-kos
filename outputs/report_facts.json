@@ -1,9 +1,9 @@
 {
-  "report_status": "DRAFT - rubrik Bagian D dan E belum tersedia; Bagian A-C disiapkan berdasarkan spesifikasi yang diberikan.",
+  "report_status": "DRAFT - Bagian A-C selesai; URL video presentasi belum tersedia.",
   "title": "Perancangan Sistem Smart Grid untuk Pemantauan dan Prediksi Konsumsi Listrik Kos Mahasiswa di Surabaya Menggunakan Regresi Linear guna Mendukung Efisiensi Energi dan Penghematan Biaya Listrik",
   "identity": {
-    "nrp": "[ISI NRP]",
-    "name": "[ISI NAMA MAHASISWA]",
+    "nrp": "ISI_NRP",
+    "name": "ISI_NAMA_MAHASISWA",
     "term": "Gasal 2026/2027"
   },
   "dataset": {
@@ -20,7 +20,7 @@
     "valid_energy_rows": 999283,
     "energy_missing_or_invalid": 29,
     "duplicate_household_timestamps_removed": 688,
-    "valid_zero_energy": 45538,
+    "valid_zero_energy": 45509,
     "customer_categories": {
       "Std": 999312
     },
@@ -28,7 +28,7 @@
     "other_interval_count": 165,
     "sum_valid_kwh": 239356.1779874,
     "quality": {
-      "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/LCL-June2015v2_0.csv",
+      "source_file": "data/raw/LCL-June2015v2_0.csv",
       "file_size_bytes": 50755532,
       "raw_column_names": [
         "LCLid",
@@ -45,7 +45,8 @@
       "rows_before_cleaning": 1000000,
       "invalid_timestamp_rows": 0,
       "energy_missing_or_invalid_rows": 29,
-      "valid_zero_energy_rows": 45538,
+      "valid_zero_energy_rows_before_deduplication": 45538,
+      "valid_zero_energy_rows": 45509,
       "negative_energy_rows": 0,
       "duplicate_household_timestamp_rows_removed": 688,
       "rows_after_timestamp_and_duplicate_cleaning": 999312,
@@ -90,7 +91,7 @@
       "duplicate_policy": "For duplicate (LCLid, timestamp) rows, retain the first record in source order; record removed count.",
       "timestamp_policy": "Parse naive source timestamps; validate target alignment using actual timestamp differences; do not synthesize DST intervals.",
       "tariffs_audit": {
-        "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/Tariffs.xlsx",
+        "source_file": "data/raw/Tariffs.xlsx",
         "file_size_bytes": 245384,
         "sheet_names": [
           "Sheet1",
@@ -144,12 +145,12 @@
         "meaning": "historical notification reference, not an electrical safety limit"
       },
       "valid_energy_sum_kwh": 239356.1779874,
-      "average_household_month_rows": 698,
+      "average_household_month_rows": 665,
       "data_source_scope": "Only the supplied 1,000,000-row LCL-June2015v2_0.csv extract is analyzed; the 167-million-row full release is not copied or treated as local observations."
     }
   },
   "tariffs": {
-    "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/Tariffs.xlsx",
+    "source_file": "data/raw/Tariffs.xlsx",
     "file_size_bytes": 245384,
     "sheet_names": [
       "Sheet1",
@@ -187,6 +188,46 @@
     },
     "monetary_rate_present": false,
     "join_decision": "Not joined to the local sample: it contains only Std customers, while workbook labels describe dynamic ToU periods in 2013."
+  },
+  "insights": {
+    "dataset_status": "real_public_sensor_dataset_subset; not synthetic",
+    "source_file": "LCL-June2015v2_0.csv",
+    "unit": "kWh per 30-minute interval",
+    "rows_analyzed": 999312,
+    "valid_energy_rows": 999283,
+    "missing_or_invalid_energy_rows": 29,
+    "valid_zero_readings": 45509,
+    "duplicate_household_timestamps_removed": 688,
+    "households": 30,
+    "period": {
+      "start": "2011-12-06T13:00:00",
+      "end": "2014-02-28T00:00:00"
+    },
+    "energy_kwh_per_30min": {
+      "mean": 0.23952791950568558,
+      "median": 0.129,
+      "std": 0.38722924860495667,
+      "p90": 0.522,
+      "p95": 0.829,
+      "p99": 1.849,
+      "max": 6.5279999,
+      "sum": 239356.1779874
+    },
+    "temporal_profiles": {
+      "hourly_csv": "outputs/hourly_profile.csv",
+      "weekday_csv": "outputs/weekday_profile.csv",
+      "monthly_csv": "outputs/monthly_profile.csv",
+      "highest_mean_hour": 0,
+      "lowest_mean_hour": 5,
+      "highest_mean_weekday": "Sen",
+      "highest_mean_month": "2012-02"
+    },
+    "interpretation_limits": [
+      "The CSV is a supplied one-million-row slice of London data, not the full release and not a Surabaya measurement.",
+      "Profiles describe this slice; household coverage and sampling are uneven across time.",
+      "Zero readings are valid observations; missing energy is not imputed.",
+      "The hourly pattern is descriptive and does not establish a causal effect."
+    ]
   },
   "experiment": {
     "target": "energy_kwh at the next exact +30 minute timestamp for the same LCLid",
@@ -268,9 +309,14 @@
     "train_only_fit": true,
     "random_state": 42,
     "linear_regression": "sklearn.linear_model.LinearRegression",
-    "run_started_unix": 1792813486.8030348,
-    "mean_household_month_energy_kwh": 342.9171604404011,
-    "mean_household_month_observations": 698
+    "run_started_unix": 1793037258.201149,
+    "mean_household_month_energy_kwh": 347.6978165239098,
+    "mean_household_month_observations": 665,
+    "household_month_coverage_filter": {
+      "minimum_valid_reading_fraction": 0.95,
+      "eligible_household_months": 665,
+      "nominal_expected_readings_per_month": "calendar days x 48 half-hour intervals"
+    }
   },
   "anomalies": {
     "method": "IsolationForest",
@@ -534,23 +580,23 @@
   "cost_scenarios": [
     {
       "reduction_percent": 0,
-      "mean_household_month_kwh": 342.9171604404011,
+      "mean_household_month_kwh": 347.6978165239098,
       "tariff_idr_per_kwh": 1444.7,
-      "estimated_cost_idr_per_household_month": 495412.42168824753,
+      "estimated_cost_idr_per_household_month": 502319.0355320925,
       "status": "simulation; London energy x assumed Indonesian household tariff"
     },
     {
       "reduction_percent": 5,
-      "mean_household_month_kwh": 325.771302418381,
+      "mean_household_month_kwh": 330.3129256977143,
       "tariff_idr_per_kwh": 1444.7,
-      "estimated_cost_idr_per_household_month": 470641.8006038351,
+      "estimated_cost_idr_per_household_month": 477203.08375548787,
       "status": "simulation; London energy x assumed Indonesian household tariff"
     },
     {
       "reduction_percent": 10,
-      "mean_household_month_kwh": 308.625444396361,
+      "mean_household_month_kwh": 312.92803487151883,
       "tariff_idr_per_kwh": 1444.7,
-      "estimated_cost_idr_per_household_month": 445871.1795194227,
+      "estimated_cost_idr_per_household_month": 452087.1319788833,
       "status": "simulation; London energy x assumed Indonesian household tariff"
     }
   ],
@@ -686,10 +732,42 @@
       "url": "https://web.pln.co.id/cms/media/siaran-pers/2026/01/cara-hitung-token-listrik-prabayar-pln",
       "license_or_status": "Official PLN press release",
       "used_for": "Exact R-1 1300VA reference rate Rp1444.70 per kWh"
+    },
+    {
+      "id": "S10",
+      "title": "PLN Jatim catat kinerja penjualan listrik tembus 46.3 TWh pada 2025",
+      "publisher": "ANTARA News Jawa Timur",
+      "publication_date": "2026-02-19",
+      "url": "https://jatim.antaranews.com/berita/1037222/pln-jatim-catat-kinerja-penjualan-listrik-tembus-463-twh-pada-2025",
+      "license_or_status": "Media report",
+      "used_for": "Regional context for electricity use; not direct evidence of a specific dormitory problem"
+    },
+    {
+      "id": "S11",
+      "title": "Jual Pzem004 T harga Oktober 2026",
+      "publisher": "Blibli",
+      "publication_date": "2026-10-24",
+      "url": "https://www.blibli.com/jual/pzem004-t",
+      "license_or_status": "Marketplace listings Rp152200-Rp218000; accessed 2026-10-27",
+      "used_for": "Indicative PZEM-004T component cost range"
+    },
+    {
+      "id": "S12",
+      "title": "ESP32 DevKit V1 30 Pin WiFi Bluetooth Micro USB Type-C",
+      "publisher": "EasyWare Store",
+      "publication_date": "2026-10-27",
+      "url": "https://store.easyware.id/produk/esp32-devkit-v1-30-pin-micro-usb-type-c/",
+      "license_or_status": "Store product listing Rp58500-Rp79200; accessed 2026-10-27",
+      "used_for": "Indicative ESP32 board component cost range"
     }
   ],
   "figures": [
     "outputs/figures/Arsitektur_SmartGrid_Kos_Mahasiswa_LONDON.png",
+    "outputs/figures/energy_distribution.png",
+    "outputs/figures/hourly_profile.png",
+    "outputs/figures/weekday_profile.png",
+    "outputs/figures/monthly_profile.png",
+    "outputs/figures/model_comparison.png",
     "outputs/figures/actual_vs_predicted.png",
     "outputs/figures/residuals.png",
     "outputs/figures/time_series_example.png",

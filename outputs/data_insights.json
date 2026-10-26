@@ -1,0 +1,40 @@
+{
+  "dataset_status": "real_public_sensor_dataset_subset; not synthetic",
+  "source_file": "LCL-June2015v2_0.csv",
+  "unit": "kWh per 30-minute interval",
+  "rows_analyzed": 999312,
+  "valid_energy_rows": 999283,
+  "missing_or_invalid_energy_rows": 29,
+  "valid_zero_readings": 45509,
+  "duplicate_household_timestamps_removed": 688,
+  "households": 30,
+  "period": {
+    "start": "2011-12-06T13:00:00",
+    "end": "2014-02-28T00:00:00"
+  },
+  "energy_kwh_per_30min": {
+    "mean": 0.23952791950568558,
+    "median": 0.129,
+    "std": 0.38722924860495667,
+    "p90": 0.522,
+    "p95": 0.829,
+    "p99": 1.849,
+    "max": 6.5279999,
+    "sum": 239356.1779874
+  },
+  "temporal_profiles": {
+    "hourly_csv": "outputs/hourly_profile.csv",
+    "weekday_csv": "outputs/weekday_profile.csv",
+    "monthly_csv": "outputs/monthly_profile.csv",
+    "highest_mean_hour": 0,
+    "lowest_mean_hour": 5,
+    "highest_mean_weekday": "Sen",
+    "highest_mean_month": "2012-02"
+  },
+  "interpretation_limits": [
+    "The CSV is a supplied one-million-row slice of London data, not the full release and not a Surabaya measurement.",
+    "Profiles describe this slice; household coverage and sampling are uneven across time.",
+    "Zero readings are valid observations; missing energy is not imputed.",
+    "The hourly pattern is descriptive and does not establish a causal effect."
+  ]
+}

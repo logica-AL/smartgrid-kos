@@ -15,7 +15,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from data_pipeline import read_meter_file, audit_tariffs, write_json
 from economics import monthly_household_energy, cost_scenarios
 from features import make_supervised, valid_examples
-from figures import draw_series, draw_histogram, draw_cost_scenarios
+from figures import draw_series, draw_histogram, draw_cost_scenarios, draw_model_comparison
 
 
 def score_row(name, actual, pred):
@@ -66,6 +66,7 @@ def run(config_path="config.yaml"):
         metrics["splits"][name]={"observations":int(len(idx)),"timestamp_min":panel.timestamp.iloc[idx].min().isoformat(),
           "timestamp_max":panel.timestamp.iloc[idx].max().isoformat(),"target_timestamp_max":target_time.iloc[idx].max().isoformat()}
     pd.DataFrame(metrics["metrics_test"]).to_csv(out/"model_comparison.csv",index=False)
+    draw_model_comparison(out/"figures/model_comparison.png", metrics["metrics_test"])
     write_json(out/"metrics.json",metrics)
     joblib.dump(model,out/"linear_regression.joblib")
     write_json(out/"model_config.json",{"config":cfg,"model_class":"sklearn.linear_model.LinearRegression","run_duration_seconds":time.time()-start,
@@ -120,11 +121,14 @@ def run(config_path="config.yaml"):
     draw_series(out/"figures/anomaly_example.png","Isolation Forest pada interval test","Energi terukur (kWh / 30 menit)",
        [("Pengukuran",powers[:limit].tolist(),"#2878c8"),("Flag anomali 1%",marked,"#e05a47")])
 
-    monthly=monthly_household_energy(panel); economic=cfg["economics"]
+    economic=cfg["economics"]
+    monthly=monthly_household_energy(panel,float(economic["minimum_month_coverage_fraction"]))
     costs=cost_scenarios(monthly,float(economic["tariff_idr_per_kwh"]))
     costs.to_csv(out/"cost_scenarios.csv",index=False)
     draw_cost_scenarios(out/"figures/cost_scenarios.png",costs.to_dict(orient="records"))
     metrics["mean_household_month_energy_kwh"]=float(monthly.mean()); metrics["mean_household_month_observations"]=int(len(monthly))
+    metrics["household_month_coverage_filter"]={"minimum_valid_reading_fraction":float(economic["minimum_month_coverage_fraction"]),
+       "eligible_household_months":int(len(monthly)),"nominal_expected_readings_per_month":"calendar days x 48 half-hour intervals"}
     write_json(out/"metrics.json",metrics)
     print(json.dumps({"test_metrics":metrics["metrics_test"],"split_counts":metrics["splits"],"anomaly_flags_1pct":anomaly_report["sensitivity"].get("0.01",{}).get("flagged_count"),
        "mean_household_month_kwh":float(monthly.mean()),"run_duration_seconds":time.time()-start},indent=2))

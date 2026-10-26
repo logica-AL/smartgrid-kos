@@ -1,5 +1,6 @@
 """Export the editable draft DOCX to a real PDF with LibreOffice."""
 from pathlib import Path
+import json
 import shutil
 import subprocess
 import tempfile
@@ -9,8 +10,11 @@ import re
 def main() -> None:
     root = Path.cwd()
     reports = root / "reports"
-    docx = reports / "ETS_Tekber_Gasal26-27_DRAFT.docx"
-    pdf = reports / "ETS_Tekber_Gasal26-27_DRAFT.pdf"
+    facts = json.loads((root / "outputs" / "report_facts.json").read_text(encoding="utf-8"))
+    nrp = facts.get("identity", {}).get("nrp", "NRP")
+    stem = f"{nrp}_ETS_Tekber_Gasal26-27_DRAFT"
+    docx = reports / f"{stem}.docx"
+    pdf = reports / f"{stem}.pdf"
     if not docx.is_file():
         raise FileNotFoundError(docx)
     soffice = shutil.which("soffice")

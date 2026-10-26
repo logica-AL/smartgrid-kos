@@ -1,5 +1,5 @@
 {
-  "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/LCL-June2015v2_0.csv",
+  "source_file": "data/raw/LCL-June2015v2_0.csv",
   "file_size_bytes": 50755532,
   "raw_column_names": [
     "LCLid",
@@ -16,7 +16,8 @@
   "rows_before_cleaning": 1000000,
   "invalid_timestamp_rows": 0,
   "energy_missing_or_invalid_rows": 29,
-  "valid_zero_energy_rows": 45538,
+  "valid_zero_energy_rows_before_deduplication": 45538,
+  "valid_zero_energy_rows": 45509,
   "negative_energy_rows": 0,
   "duplicate_household_timestamp_rows_removed": 688,
   "rows_after_timestamp_and_duplicate_cleaning": 999312,
@@ -61,7 +62,7 @@
   "duplicate_policy": "For duplicate (LCLid, timestamp) rows, retain the first record in source order; record removed count.",
   "timestamp_policy": "Parse naive source timestamps; validate target alignment using actual timestamp differences; do not synthesize DST intervals.",
   "tariffs_audit": {
-    "source_file": "/Users/al/Tekber/smartgrid-kos/data/raw/Tariffs.xlsx",
+    "source_file": "data/raw/Tariffs.xlsx",
     "file_size_bytes": 245384,
     "sheet_names": [
       "Sheet1",
@@ -115,6 +116,6 @@
     "meaning": "historical notification reference, not an electrical safety limit"
   },
   "valid_energy_sum_kwh": 239356.1779874,
-  "average_household_month_rows": 698,
+  "average_household_month_rows": 665,
   "data_source_scope": "Only the supplied 1,000,000-row LCL-June2015v2_0.csv extract is analyzed; the 167-million-row full release is not copied or treated as local observations."
 }

@@ -78,7 +78,12 @@
   "train_only_fit": true,
   "random_state": 42,
   "linear_regression": "sklearn.linear_model.LinearRegression",
-  "run_started_unix": 1792814065.33567,
-  "mean_household_month_energy_kwh": 342.9171604404011,
-  "mean_household_month_observations": 698
+  "run_started_unix": 1793037258.201149,
+  "mean_household_month_energy_kwh": 347.6978165239098,
+  "mean_household_month_observations": 665,
+  "household_month_coverage_filter": {
+    "minimum_valid_reading_fraction": 0.95,
+    "eligible_household_months": 665,
+    "nominal_expected_readings_per_month": "calendar days x 48 half-hour intervals"
+  }
 }

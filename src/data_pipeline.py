@@ -37,19 +37,22 @@ def read_meter_file(path: str | Path) -> tuple[pd.DataFrame, dict[str, Any]]:
     })
     invalid_ts = int(out.timestamp.isna().sum())
     invalid_energy = int(out.energy_kwh.isna().sum())
-    zero_energy = int(out.energy_kwh.eq(0).sum())
+    zero_energy_before_dedup = int(out.energy_kwh.eq(0).sum())
     negative_energy = int(out.energy_kwh.lt(0).sum())
     duplicate_key = out.duplicated(["LCLid", "timestamp"], keep="first")
     duplicates = int(duplicate_key.sum())
     clean = out.dropna(subset=["LCLid", "timestamp"]).loc[~duplicate_key].copy()
     clean = clean.sort_values(["LCLid", "timestamp"], kind="mergesort").reset_index(drop=True)
+    zero_energy_after_dedup = int(clean.energy_kwh.eq(0).sum())
     # Keep missing/bad energy as NaN; it is never imputed to zero.
     intervals = clean.groupby("LCLid", sort=False)["timestamp"].diff().dropna()
     audit = {
-        "source_file": str(path), "file_size_bytes": path.stat().st_size,
+        "source_file": path.name if path.is_absolute() else str(path), "file_size_bytes": path.stat().st_size,
         "raw_column_names": original_columns, "normalized_column_names": normalized,
         "rows_before_cleaning": raw_rows, "invalid_timestamp_rows": invalid_ts,
-        "energy_missing_or_invalid_rows": invalid_energy, "valid_zero_energy_rows": zero_energy,
+        "energy_missing_or_invalid_rows": invalid_energy,
+        "valid_zero_energy_rows_before_deduplication": zero_energy_before_dedup,
+        "valid_zero_energy_rows": zero_energy_after_dedup,
         "negative_energy_rows": negative_energy, "duplicate_household_timestamp_rows_removed": duplicates,
         "rows_after_timestamp_and_duplicate_cleaning": int(len(clean)),
         "rows_with_valid_numeric_energy_after_cleaning": int(clean.energy_kwh.notna().sum()),
@@ -87,7 +90,7 @@ def audit_tariffs(path: str | Path) -> dict[str, Any]:
                 item["categories"] = {str(k): int(v) for k, v in frame["Tariff"].value_counts(dropna=False).items()}
             item["missing_by_column"] = {str(k): int(v) for k, v in frame.isna().sum().items()}
         sheets[sheet] = item
-    return {"source_file": str(path), "file_size_bytes": path.stat().st_size, "sheet_names": xls.sheet_names,
+    return {"source_file": path.name if path.is_absolute() else str(path), "file_size_bytes": path.stat().st_size, "sheet_names": xls.sheet_names,
             "sheets": sheets, "monetary_rate_present": False,
             "join_decision": "Not joined to the local sample: it contains only Std customers, while workbook labels describe dynamic ToU periods in 2013."}
 

@@ -12,6 +12,13 @@ __pycache__/
 # Office lock files
 ~$*
 
-# Codex authoring previews and private build outputs
-.codex-build/
-.codex-output/
+# Local credentials/personal settings and generated personal reports
+.env
+.env.*
+config.local.yaml
+reports/
+
+# Runtime logs and Python environments
+outputs/logs/
+.venv/
+venv/
